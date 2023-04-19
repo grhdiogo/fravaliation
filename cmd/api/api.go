@@ -28,7 +28,6 @@ func main() {
 		DBNm: os.Getenv("POSTGRES_DB"),
 		Pswd: os.Getenv("POSTGRES_PASSWORD"),
 	}
-	fmt.Println(">>>>>>>>>", pgconfig)
 	postgres.SetConfiguration(pgconfig)
 	inst := postgres.GetInstance()
 	log.Print("Initialize Migrations")

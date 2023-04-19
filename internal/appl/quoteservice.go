@@ -80,6 +80,9 @@ func (s *quoteServiceImpl) validate(p CreateQuoteParams) error {
 	if !cep.CheckZipCode(p.AddressZipCode) || cepErr != nil {
 		errs = append(errs, "CEP não existe")
 	}
+	if len(p.Volumes) == 0 {
+		errs = append(errs, "Ao menos 1(um) volume deve ser passado")
+	}
 	for index, v := range p.Volumes {
 		i := index + 1
 		// Category
