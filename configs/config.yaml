@@ -1,0 +1,7 @@
+name: "frete-rapido-avaliation"
+database:
+  - postgres:
+      host: ""
+      user: ""
+      pswd: "mysecretpassword"
+      port: 5432
