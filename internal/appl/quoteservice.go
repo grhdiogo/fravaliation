@@ -9,6 +9,7 @@ import (
 	"fravaliation/internal/infra/cep"
 	"fravaliation/internal/infra/db/postgres"
 	"fravaliation/internal/infra/fr"
+	"os"
 	"strconv"
 	"strings"
 
@@ -17,10 +18,7 @@ import (
 
 // TODO: Remover daqui?
 const (
-	CNPJ         = "25438296000158"
-	AuthToken    = "1d52a9b6b78cf07b08586152459a5c90"
-	PlatformCode = "5AKVkHqCn"
-	BaseUrl      = "https://sp.freterapido.com"
+	CNPJ = "25438296000158"
 )
 
 type QuoteService interface {
@@ -134,7 +132,7 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 	}
 	// new client
 	cli := fr.NewFrClient(fr.Config{
-		BaseUrl: BaseUrl,
+		BaseUrl: os.Getenv("FR_BASE_URL"),
 	})
 	// validation already made on validate func
 	zipCode, _ := strconv.Atoi(p.AddressZipCode)
@@ -170,8 +168,8 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 	req := &fr.CreateFreightQuotationRequest{
 		Shipper: fr.Shipper{
 			RegisteredNumber: CNPJ,
-			Token:            AuthToken,
-			PlatformCode:     PlatformCode,
+			Token:            os.Getenv("FR_AUTH_TOKEN"),
+			PlatformCode:     os.Getenv("PLATFORM_CODE"),
 		},
 		Recipient: fr.Recipient{
 			Type:    fr.RecipientNaturalPerson,
