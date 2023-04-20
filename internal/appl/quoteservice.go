@@ -18,8 +18,9 @@ import (
 
 // TODO: Remover daqui?
 const (
-	CNPJ    = "25438296000158"
-	ZIPCODE = 29161376
+	cnpj    = "25438296000158"
+	zipcode = 29161376
+	country = "Bra"
 )
 
 type QuoteService interface {
@@ -168,22 +169,22 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 	// create request
 	req := &fr.CreateFreightQuotationRequest{
 		Shipper: fr.Shipper{
-			RegisteredNumber: CNPJ,
+			RegisteredNumber: cnpj,
 			Token:            os.Getenv("FR_AUTH_TOKEN"),
 			PlatformCode:     os.Getenv("PLATFORM_CODE"),
 		},
 		Recipient: fr.Recipient{
 			Type:    fr.RecipientNaturalPerson,
-			Country: "BRA",
+			Country: country,
 			// TODO: CEP?
 			Zipcode: zipCode,
 		},
 		Dispatchers: []fr.Dispatcher{
 			{
-				RegisteredNumber: CNPJ,
+				RegisteredNumber: cnpj,
 				Volumes:          volumes,
 				// TODO: CEP?
-				Zipcode: ZIPCODE,
+				Zipcode: zipcode,
 			},
 		},
 		// TODO: Qual dos?
@@ -211,7 +212,7 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 	// store
 	err = rep.Store(quote.Entity{
 		ID:      uuid.New().String(),
-		CpfCnpj: CNPJ,
+		CpfCnpj: cnpj,
 		Address: quote.Address{
 			Cep: p.AddressZipCode,
 		},
