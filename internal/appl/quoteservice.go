@@ -18,7 +18,8 @@ import (
 
 // TODO: Remover daqui?
 const (
-	CNPJ = "25438296000158"
+	CNPJ    = "25438296000158"
+	ZIPCODE = 29161376
 )
 
 type QuoteService interface {
@@ -182,7 +183,7 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 				RegisteredNumber: CNPJ,
 				Volumes:          volumes,
 				// TODO: CEP?
-				Zipcode: zipCode,
+				Zipcode: ZIPCODE,
 			},
 		},
 		// TODO: Qual dos?
@@ -230,7 +231,7 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 				// TODO: Que campo é esse
 				Service: v1.Service,
 				// TODO: Que campo é esse
-				Deadline: v1.DeliveryTime.EstimatedDate,
+				Deadline: strconv.Itoa(v1.DeliveryTime.Days),
 				Price:    v1.FinalPrice,
 			})
 		}
