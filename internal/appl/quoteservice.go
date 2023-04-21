@@ -170,7 +170,7 @@ func (s *quoteServiceImpl) CreateQuoteFreight(p CreateQuoteParams) (*CreateQuote
 	req := &fr.CreateFreightQuotationRequest{
 		Shipper: fr.Shipper{
 			RegisteredNumber: cnpj,
-			Token:            os.Getenv("FR_AUTH_TOKEN"),
+			Token:            os.Getenv("FR_AT"),
 			PlatformCode:     os.Getenv("PLATFORM_CODE"),
 		},
 		Recipient: fr.Recipient{

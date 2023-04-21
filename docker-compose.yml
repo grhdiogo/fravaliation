@@ -9,7 +9,7 @@ services:
       - DATABASE_HOST=${DB_HOST}
       - DATABASE_PORT=${DB_PORT}
       - PORT=${PORT}
-      - FR_AUTH_TOKEN=${FR_AUTH_TOKEN}
+      - FR_AT=${FR_AT}
       - PLATFORM_CODE=${PLATFORM_CODE}
       - FR_BASE_URL=${FR_BASE_URL}
     tty: true
